@@ -11,7 +11,7 @@ Analyzes the visited website and detects presence of any attacks.
 - Each record consists of 2 fetures -
     - Website URL
     - Category
-- Converts to URLs to IP addresses
+- Converts URLs to IP addresses
 - Machine Learning model that helps in classification
 - Network analyzer that monitors and detects presence of attacks
 
