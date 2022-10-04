@@ -54,7 +54,7 @@ rf = RandomForestClassifier(n_estimators=10, criterion = 'entropy', random_state
 print('checkpoint-4')
 rf.fit(X_train, y_train)
 print('checkpoint-5')
-with open('model.pkl', 'wb') as fid:
+with open('build/model.pkl', 'wb') as fid:
     pickle.dump(rf, fid)
 # rf = rf.best_estimator_
 
