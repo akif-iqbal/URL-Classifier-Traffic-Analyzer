@@ -50,7 +50,7 @@ param_grid = {  'n_estimators': np.arange(50, 200, 15),
                 'max_samples': [0.3, 0.5, 0.8]}
 
 # rf = RandomizedSearchCV(RandomForestClassifier(n_jobs=-1), param_grid, n_iter=15, error_score='raise')
-rf = RandomForestClassifier(n_estimators=10, criterion = 'entropy', random_state = 0, n_jobs=-1, max_depth=7)
+rf = RandomForestClassifier(n_estimators=10, criterion = 'entropy', random_state = 5, n_jobs=-1, max_depth=100)
 print('checkpoint-4')
 rf.fit(X_train, y_train)
 print('checkpoint-5')
@@ -64,8 +64,20 @@ with open('build/model.pkl', 'wb') as fid:
 
 # print('checkpoint-5')
 
-y_pred = rf.predict(X_test)
-print('checkpoint-6')
+# y_pred = rf.predict(X_test)
+# print('checkpoint-6')
+# cm = confusion_matrix(y_test, y_pred)
+# print(cm)
+# print(accuracy_score(y_test, y_pred))
+
+load_model = pickle.load(open('build/model.pkl', 'rb'))
+y_pred = load_model.predict(X_test)
 cm = confusion_matrix(y_test, y_pred)
 print(cm)
-print(accuracy_score(y_test, y_pred))
+result = load_model.score(X_test, y_test)
+print(result)
+
+X_predict = ["google.com", "wikipedia.org", "friv.com"]
+X_predict = vectorizer.transform(X_predict)
+new_predict = load_model.predict(X_predict)
+print(new_predict)
