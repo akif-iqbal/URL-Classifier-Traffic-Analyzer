@@ -50,7 +50,7 @@ param_grid = {  'n_estimators': np.arange(50, 200, 15),
                 'max_samples': [0.3, 0.5, 0.8]}
 
 # rf = RandomizedSearchCV(RandomForestClassifier(n_jobs=-1), param_grid, n_iter=15, error_score='raise')
-rf = RandomForestClassifier(n_estimators=10, criterion = 'entropy', random_state = 5, n_jobs=-1, max_depth=100)
+rf = RandomForestClassifier(n_estimators=20, criterion = 'entropy', random_state = 24, n_jobs=-1, max_depth=250)
 print('checkpoint-4')
 rf.fit(X_train, y_train)
 print('checkpoint-5')
