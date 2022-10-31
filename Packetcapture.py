@@ -1,6 +1,6 @@
 import pyshark
 #cap=pyshark.FileCapture(r'C:\Users\uveer\OneDrive\Documents\Project_capstone\p.cap.txt')
-capture=pyshark.LiveCapture()
+capture=pyshark.LiveCapture(bpf_filter='ip and port 53')
 capture.sniff(timeout=10)
 arrayofpackets=[]
 for packet in capture.sniff_continuously(packet_count=5):
@@ -19,6 +19,12 @@ for packet in capture.sniff_continuously(packet_count=5):
         arrayofpackets.append(arofpackets)
     except:
         print("attribute isnt available in packet")
+    try:
+        if packet.dns:
+            web=packet.dns.qry_name
+            print(web)
+    except:
+        print("The DNS field isnt available")
 
 
 
