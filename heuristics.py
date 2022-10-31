@@ -66,3 +66,10 @@ class Heuristics:
         wd = webdriver.Chrome('chromedriver', options=chrome_options)
         wd.get(url)
         return count_tags(wd.page_source)
+
+obj = Heuristics()
+
+print(obj.phishing_word_count("http://www.software-secure.com/asp/"))
+print(obj.url_has_exe("http://food.hubcom.com/recipe/cgi-win/recipe.exe/1"))
+print(obj.url_tokenize("http://food.hubcom.com/recipe/cgi-win/recipe.exe/1"))
+print(obj.scan_pg_src("http://www.liquidgeneration.com/"))
