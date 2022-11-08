@@ -1,9 +1,15 @@
 import pyshark
+import requests
+import pickle
+import os
+from heuristics import Heuristics
+
 #cap=pyshark.FileCapture(r'C:\Users\uveer\OneDrive\Documents\Project_capstone\p.cap.txt')
 capture=pyshark.LiveCapture(bpf_filter='ip and port 53')
 capture.sniff(timeout=10)
 arrayofpackets=[]
-for packet in capture.sniff_continuously(packet_count=5):
+websites=[]
+for packet in capture.sniff_continuously(packet_count=4):
     print(packet)
     arofpackets=[]
     #print(packet.ip.src)
@@ -22,15 +28,61 @@ for packet in capture.sniff_continuously(packet_count=5):
     try:
         if packet.dns:
             web=packet.dns.qry_name
-            print(web)
+            w=web
+            websites.append(w)
+            print(w)
+            
     except:
         print("The DNS field isnt available")
 
 
 
 '''cap'''
-print(arrayofpackets)
-dir(packet.my_layer)
+l=arrayofpackets
+print(l)
+_=os.system('cls')
+print(websites)
+
+for website in websites:
+    r=requests.head('https://'+website)
+    if r.status_code==200:
+        w=website
+        break
+#dir(packet.my_layer)
+
+import LogisticRegression
+# import SupportVectorMachine
+
+
+# net=pickle.load(open("build/svm_model.pkl","rb"))
+# print(net.predict([[11,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,2000000,1,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,40,200,1000000,1000000,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,2,0,26883,0,0,80,0,0,0,0,0,0,0,0]]))
+
+#w = w.encode('ascii', 'ignore').decode('unicode_escape')
+
+obj=Heuristics()
+#w='http://food.hubcom.com/recipe/cgi-win/recipe.exe/1'
+print(obj.phishing_word_count(w))
+print(obj.url_has_exe(w))
+print(obj.url_tokenize(w))
+q="https://"+w
+print(obj.scan_pg_src(q))
+logi=pickle.load(open("build/model.pkl","rb"))
+w=vectorizer.transform(w)
+print(logi.predict(w))
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 def isddos(pkt):
   if(pkt.tcp):
