@@ -1,5 +1,6 @@
 import pyshark
 import joblib
+from logistic import LogisReg
 #cap=pyshark.FileCapture(r'C:\Users\uveer\OneDrive\Documents\Project_capstone\p.cap.txt')
 capture=pyshark.LiveCapture(bpf_filter='ip and port 53')
 capture.sniff(timeout=10)
@@ -32,6 +33,11 @@ for packet in capture.sniff_continuously(packet_count=5):
 
 svm_ddos=joblib.load("SVM_DDoS")
 print(svm_ddos.predict([[11,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,2000000,1,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,40,200,1000000,1000000,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,2,0,26883,0]]))
+
+ob=LogisReg()
+data=ob.process()
+pred=ob.testing(websites)
+print(pred)
 '''cap'''
 print(arrayofpackets)
 print(websites)

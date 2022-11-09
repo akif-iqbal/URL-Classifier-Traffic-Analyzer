@@ -45,16 +45,9 @@ class LogisReg(object):
         pickle.dump(self.logit, open('build/logistic.pkl', 'wb'))
         return self.logit
 
-    def testing(self):
+    def testing(self,website):
         load_model = pickle.load(open('build/logistic.pkl', 'rb'))
-        X_predict = X_predict = ["google.com/search=jcharistech",
-        "www.buyfakebillsonlinee.blogspot.com", 
-        "www.unitedairlineslogistics.com",
-        "www.stonehousedelivery.com",
-        "www.silkroadmeds-onlinepharmacy.com", 
-        "www.radsport-voggel.de/wp-admin/includes/log.exe", 
-        "ahrenhei.without-transfer.ru/nethost.exe ",
-        "www.itidea.it/centroesteticosothys/img/_notes/gum.exe"]
+        X_predict = website
         X_predict = vectorizer.transform(X_predict)
         new_predict = load_model.predict(X_predict)
         return new_predict
