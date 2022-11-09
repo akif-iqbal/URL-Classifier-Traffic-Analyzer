@@ -1,4 +1,5 @@
 import pyshark
+from logistic import LogisReg
 #cap=pyshark.FileCapture(r'C:\Users\uveer\OneDrive\Documents\Project_capstone\p.cap.txt')
 capture=pyshark.LiveCapture(bpf_filter='ip and port 53')
 capture.sniff(timeout=10)
@@ -26,7 +27,10 @@ for packet in capture.sniff_continuously(packet_count=5):
     except:
         print("The DNS field isnt available")
 
-
+ob=LogisReg()
+data=ob.process()
+pred=ob.testing(websites)
+print(pred)
 
 '''cap'''
 print(arrayofpackets)
