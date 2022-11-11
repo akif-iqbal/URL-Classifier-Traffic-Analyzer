@@ -31,7 +31,7 @@ for packet in capture.sniff_continuously(packet_count=5):
         print("The DNS field isnt available")
 
 
-svm_ddos=joblib.load("SVM_DDoS")
+svm_ddos=joblib.load("build/SVM_DDoS")
 print(svm_ddos.predict([[11,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,2000000,1,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,40,200,1000000,1000000,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,2,0,26883,0]]))
 
 ob=LogisReg()
