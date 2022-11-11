@@ -30,7 +30,7 @@ vectorizer = TfidfVectorizer(tokenizer=modifiedTokenizer)
 class LogisReg(object):
 
     def process(self):
-        urls_data = pd.read_csv('CSECIS/mal_legit_classification.csv')
+        urls_data = pd.read_csv('datasets/mal_legit_classification.csv')
         y = urls_data["label"]
         url_list = urls_data["url"]
         X = vectorizer.fit_transform(url_list)
