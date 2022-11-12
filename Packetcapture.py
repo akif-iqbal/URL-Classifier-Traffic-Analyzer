@@ -1,6 +1,7 @@
 import pyshark
 import joblib
 from logistic import LogisReg
+from mnb import MNB
 #cap=pyshark.FileCapture(r'C:\Users\uveer\OneDrive\Documents\Project_capstone\p.cap.txt')
 capture=pyshark.LiveCapture(bpf_filter='ip and port 53')
 capture.sniff(timeout=10)
@@ -31,7 +32,8 @@ for packet in capture.sniff_continuously(packet_count=5):
     except:
         print("The DNS field isnt available")
 
-
+print(arrayofpackets)
+print(websites)
 svm_ddos=joblib.load("build/SVM_DDoS")
 a=(svm_ddos.predict([[11,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,2000000,1,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,40,200,1000000,1000000,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,2,0,26883,0]]))
 svm_.append(a)
@@ -45,15 +47,30 @@ svm_webap=joblib.load("build/SVM_webap")
 j=(svm_webap.predict([[11,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,2000000,1,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,40,200,1000000,1000000,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,2,0,26883]]))
 svm_.append(j)
 print(svm_)
-
+'''for i in range(len(websites)):
+    websites[i]="http://"+websites[i]'''
+for i in range(len(websites)):
+    web = websites[i].split('.')
+    if len(web)<3:
+        continue
+    del web[0]
+    stripWeb = ".".join(web)
+    websites[i] = stripWeb
+    '''websites[i]=websites[0:len(websites[i])-3]'''
+for i in range(len(websites)):
+    websites[i]="http://www."+websites[i]
+print(websites)
 ob=LogisReg()
 data=ob.process()
 pred=ob.testing(websites)
 print(pred)
+obj=MNB()
+print(obj.testing(websites))
+print(pred)
 '''cap'''
-print(arrayofpackets)
-print(websites)
-dir(packet.my_layer)
+
+
+'''dir(packet.my_layer)'''
 
 def isddos(pkt):
   if(pkt.tcp):
