@@ -47,8 +47,8 @@ svm_webap=joblib.load("build/SVM_webap")
 j=(svm_webap.predict([[11,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,2000000,1,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,40,200,1000000,1000000,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,2,0,26883]]))
 svm_.append(j)
 print(svm_)
-'''for i in range(len(websites)):
-    websites[i]="http://"+websites[i]'''
+
+
 for i in range(len(websites)):
     web = websites[i].split('.')
     if len(web)<3:
@@ -56,10 +56,12 @@ for i in range(len(websites)):
     del web[0]
     stripWeb = ".".join(web)
     websites[i] = stripWeb
-    '''websites[i]=websites[0:len(websites[i])-3]'''
+
 for i in range(len(websites)):
     websites[i]="http://www."+websites[i]
 print(websites)
+
+
 ob=LogisReg()
 data=ob.process()
 pred=ob.testing(websites)
@@ -67,9 +69,9 @@ print(pred)
 obj=MNB()
 print(obj.testing(websites))
 print(pred)
+
+
 '''cap'''
-
-
 '''dir(packet.my_layer)'''
 
 def isddos(pkt):
@@ -94,5 +96,3 @@ def isddos(pkt):
           print("Traffic is from normal source")
       else:
           print("UDP Flood")
-
-
