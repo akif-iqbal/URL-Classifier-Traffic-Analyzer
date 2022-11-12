@@ -6,6 +6,7 @@ capture=pyshark.LiveCapture(bpf_filter='ip and port 53')
 capture.sniff(timeout=10)
 arrayofpackets=[]
 websites=[]
+svm_=[]
 for packet in capture.sniff_continuously(packet_count=5):
     print(packet)
     arofpackets=[]
@@ -32,7 +33,18 @@ for packet in capture.sniff_continuously(packet_count=5):
 
 
 svm_ddos=joblib.load("build/SVM_DDoS")
-print(svm_ddos.predict([[11,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,2000000,1,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,40,200,1000000,1000000,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,2,0,26883,0]]))
+a=(svm_ddos.predict([[11,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,2000000,1,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,40,200,1000000,1000000,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,2,0,26883,0]]))
+svm_.append(a)
+svm_dos=joblib.load("build/SVM_DoS")
+b=(svm_dos.predict([[11,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,2000000,1,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,40,200,1000000,1000000,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,2,0]]))
+svm_.append(b)
+svm_botnets=joblib.load("build/SVM_Botnets-")
+i=(svm_botnets.predict([[11,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,2000000,1,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,40,200,1000000,1000000,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,2,0,26883]]))
+svm_.append(i)
+svm_webap=joblib.load("build/SVM_webap")
+j=(svm_webap.predict([[11,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,2000000,1,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,40,200,1000000,1000000,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,2,0,26883]]))
+svm_.append(j)
+print(svm_)
 
 ob=LogisReg()
 data=ob.process()
