@@ -1,5 +1,7 @@
 import pickle
 import os
+import warnings
+warnings.filterwarnings("ignore")
 
 class MNB:
     def testing(self, url):
@@ -36,4 +38,5 @@ class MNB:
         print('nobroker: ', loaded_model.predict(['http://www.nobroker.in/']))
 
 # obj = MNB()
+# obj.testRun()
 # print("Naive Bayes result: ", obj.testing(['http://www.nobroker.in/']))
