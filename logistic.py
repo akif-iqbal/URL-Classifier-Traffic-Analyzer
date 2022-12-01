@@ -36,7 +36,7 @@ class LogisReg(object):
         X = vectorizer.fit_transform(url_list)
         self.X_train, self.X_test, self.y_train, self.y_test = train_test_split(X, y, test_size=0.3, random_state=42)
         return self.X_train, self.X_test, self.y_train, self.y_test
-
+ 
 
     def training(self):
         self.Xtrain,self.X_test,self.y_train,self.y_test=self.process()
@@ -46,6 +46,7 @@ class LogisReg(object):
         return self.logit
 
     def testing(self,website):
+        self.process()
         load_model = pickle.load(open('build/logistic.pkl', 'rb'))
         X_predict = website
         X_predict = vectorizer.transform(X_predict)
