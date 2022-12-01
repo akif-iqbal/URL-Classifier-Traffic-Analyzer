@@ -85,6 +85,7 @@ for i in range(len(websites)):
 #     stripWeb = ".".join(web)
 #     logistic_web[url] = stripWeb
 # print(logistic_web)
+
 web=websites
 for i in range(len(web)):
     if "https://www." or "https://" in web[i]:
@@ -103,13 +104,20 @@ for i in range(len(websites)):
     websites[i]="http://www."+websites[i]
 print(websites)
 
-# heur = Heuristics()
-# for url in websites:
-#     print('Current URL: ', url)
-#     print('Tokenized: ', heur.url_tokenize(url))
-#     print('Exe: ', heur.url_has_exe(url))
-#     print('Phishing words found: ', heur.phishing_word_count(url))
-#     print('HTML source code: ', url, ' ', heur.scan_pg_src(url))
+forHtml = []
+for i in range(len(websites)):
+    forHtml.append(websites[i]+".com/")
+
+heur = Heuristics()
+for url in forHtml:
+    print('Current URL: ', url)
+    print('Tokenized: ', heur.url_tokenize(url))
+    print('Exe: ', heur.url_has_exe(url))
+    print('Phishing words found: ', heur.phishing_word_count(url))
+    try:
+        print('HTML source code: ', url, ' ', heur.scan_pg_src(url))
+    except:
+        print('Error in HTML scan', url)
 
 ob=LogisReg()
 #data=ob.process()
