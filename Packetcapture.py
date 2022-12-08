@@ -61,11 +61,16 @@ svm_.append(i)
 svm_webap=joblib.load("build/SVM_webap")
 j=(svm_webap.predict([[11,1,1,1,1,0,0,0,0,0,0,0,0,0,0,0,2000000,1,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,40,200,1000000,1000000,0,0,0,0,0,0,0,0,1,0,0,0,0,1,0,0,0,0,0,0,0,0,0,1,0,2,0,26883]]))
 svm_.append(j)
-#print(svm_)
-svm_ftp=joblib.load("build/SVM_ftp")
-k=(svm_ftp.predict(arrayofpackets))
-svm_.append(k)
 print(svm_)
+'''svm_ftp=joblib.load("build/SVM_ftp")
+k=(svm_ftp.predict(arrayofpackets))
+svm_.append(k)'''
+'''print(svm_)'''
+'''svm_dos_packetcapture=joblib.load("build/SVM_DoS_packetcapture")
+k=(svm_dos_packetcapture.predict(arrayofpackets))
+svm_.append(k)
+print(svm_)'''
+
 
 
 for i in range(len(websites)):
@@ -108,6 +113,8 @@ forHtml = []
 for i in range(len(websites)):
     forHtml.append(websites[i]+".com/")
 
+forHtml = list(set(forHtml))
+
 heur = Heuristics()
 for url in forHtml:
     print('Current URL: ', url)
@@ -123,7 +130,7 @@ ob=LogisReg()
 #data=ob.process()
 pred=ob.testing(web)
 print(pred)
-
+print(forHtml)
 obj=MNB()
 print(obj.testing(websites))
 
